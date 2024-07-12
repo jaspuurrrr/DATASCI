@@ -1,0 +1,8 @@
+driver.get("https://charts.spotify.com/home")
+time.sleep(5)
+driver.find_element(By.CSS_SELECTOR, '#__next > div > div > main > div.Content-sc-1n5ckz4-0.jyvkLv > div > header > div > div.ChartsHomeHeader__HeaderLinks-vilr39-2.hQLnwL > a > div.ButtonInner-sc-14ud5tc-0.iMWZgy.encore-bright-accent-set').click()
+time.sleep(5)
+driver.find_element(By.CSS_SELECTOR, '#login-username').send_keys("jasperturado29@gmail.com")
+driver.find_element(By.CSS_SELECTOR, '#login-password').send_keys("jaspuurrrr")
+driver.find_element(By.CSS_SELECTOR, '#login-button > span.ButtonInner-sc-14ud5tc-0.liTfRZ.encore-bright-accent-set').click()
+time.sleep(5)
