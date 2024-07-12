@@ -8,18 +8,18 @@ from tabulate import tabulate
 start_time = time.time()
 
 # Load data
-data = pd.read_csv('/Users/jaspuurrrr/DATASCI/binned_rank_streams.csv', low_memory=False) 
+data = pd.read_csv('/Users/jaspuurrrr/DATASCI/rank_movement_binned.csv', low_memory=False) 
 data2 = pd.read_csv('/Users/jaspuurrrr/DATASCI/apriori/testing.csv', low_memory=False) 
 data.head() 
 
-print("Shape of the data:", data.shape)
+#print("Shape of the data:", data.shape)
 
 df = pd.DataFrame(data)
 df['artist_names'] = df['artist_names'].str.split(', ')
 
 df_artists = df.explode('artist_names').reset_index(drop=True)
-print("\nDataFrame with artists split into separate rows:")
-print(df_artists.head())
+#print("\nDataFrame with artists split into separate rows:")
+#print(df_artists.head())
 
 # Remove duplicates caused by exploding rows
 #df_artists.drop_duplicates(inplace=True)
@@ -28,9 +28,9 @@ print(df_artists.head())
 transaction_data = df_artists.groupby(['uri', 'date'])['artist_names'].apply(list).reset_index()
 transaction_data = transaction_data.merge(df.drop(columns='artist_names').drop_duplicates(), on=['uri', 'date'])
 
-print("\nTransaction format data:")
+'''print("\nTransaction format data:")
 print(len(transaction_data.head(100)))
-print(transaction_data.head(1000))
+print(transaction_data.head(1000))'''
 
 transactions = []
 
@@ -61,7 +61,7 @@ records = []
 for i in range(0, 20):
     records.append([str(data.values[i, j]) for j in [1, 10, 12]])
 
-print(tabulate(transactions, headers=["month", "stream_level", "artist_1", "artist_2", "artist_3", "artist_4", "artist_5", "artist_6", "artist_7", "artist_8", "artist_9", "artist_10", "artist_11", "artist_12", "artist_13", "artist_14", "artist_15", "artist_16", "artist_17", "artist_18"]))#]))#
+#print(tabulate(transactions, headers=["month", "stream_level", "artist_1", "artist_2", "artist_3", "artist_4", "artist_5", "artist_6", "artist_7", "artist_8", "artist_9", "artist_10", "artist_11", "artist_12", "artist_13", "artist_14", "artist_15", "artist_16", "artist_17", "artist_18"]))#]))#
 
 itemsets, rules = apriori(transactions, min_support=0.0001, min_confidence=0.2)
 

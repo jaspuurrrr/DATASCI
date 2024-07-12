@@ -1,2 +1,0 @@
-# DATASCI
- datasci final proj
